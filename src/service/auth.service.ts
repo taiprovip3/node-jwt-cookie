@@ -1,5 +1,6 @@
 import { userRepository } from "../repository/user.repository";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import { jwtConfig } from "../config/jwt-config";
 
@@ -44,5 +45,11 @@ export class AuthService {
                 user,
             }
         };
+    }
+    async refreshToken(refreshToken: string) {
+        const payload: any = jwt.verify(refreshToken, jwtConfig.jwtRefreshSecret); // verify refresh token
+        console.log("What is inside the payload of refreshToken?:", payload);
+        const newAccessToken = generateAccessToken(payload.userId);
+        return newAccessToken;
     }
 }

@@ -8,7 +8,7 @@ import { AppDataSource } from "./config/data-source";
 
 const app = express();
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
