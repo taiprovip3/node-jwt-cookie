@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+dotenv.config();
 import authRoutes from "./routes/auth.routes";
 import { AppDataSource } from "./config/data-source";
 
@@ -10,8 +11,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
-dotenv.config();
 
 const PORT = 3000;
 

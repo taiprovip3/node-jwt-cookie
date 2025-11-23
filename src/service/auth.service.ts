@@ -1,5 +1,7 @@
 import { userRepository } from "../repository/user.repository";
 import bcrypt from "bcryptjs";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import { jwtConfig } from "../config/jwt-config";
 
 export class AuthService {
     async register(username: string, password: string) {
@@ -16,5 +18,31 @@ export class AuthService {
         });
 
         return await userRepository.save(user);
+    }
+
+    async login(username: string, password: string) {
+        const user = await userRepository.findOne({ where: { username } }); 
+        console.log('User just logged=', user);
+
+        if (!user) {
+            throw new Error("Invalid username or password");
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error("Invalid password");
+        }
+
+        return {
+            status: "success",
+            message: "Login successful",
+            data: {
+                token_type: "Bearer",
+                access_token: generateAccessToken(user.id),
+                expires_in: jwtConfig.accessTokenExpirationTime,
+                refresh_token: generateRefreshToken(user.id),
+                user,
+            }
+        };
     }
 }

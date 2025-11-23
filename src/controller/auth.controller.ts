@@ -15,4 +15,13 @@ export class AuthController {
         }
     }
 
+    async login(req: Request, res: Response) {
+        try {
+            const { username, password } = req.body;
+            const oauth2Response = await authService.login(username, password);
+            res.status(200).json(oauth2Response);
+        } catch (error) {
+            res.status(401).json({ message: (error as Error).message });
+        }
+    }
 }
