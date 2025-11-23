@@ -55,4 +55,11 @@ export class AuthController {
         }
     }
 
+    logout(req: Request, res: Response) {
+        res.clearCookie("refresh_token", {
+            path: "/api/auth/refresh-token",
+        });
+
+        res.json({ message: "Logged out" });
+    }
 }
