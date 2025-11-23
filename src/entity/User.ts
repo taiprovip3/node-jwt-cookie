@@ -37,4 +37,9 @@ export class User {
 
     @ManyToOne(() => Role, (role) => role.users, { eager: true }) // eager: true → mỗi lần load User sẽ tự động load role (tiện cho auth).
     role!: Role;
+
+    constructor() {
+        this.profile = null;
+        this.role = { id: 1 } as Role; // Mặc định mỗi user mới sẽ có role là "USER".
+    }
 }
