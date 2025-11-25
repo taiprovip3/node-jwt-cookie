@@ -24,8 +24,6 @@ export class AuthService {
 
     async login(username: string, password: string) {
         const user = await userRepository.findOne({ where: { username } }); 
-        console.log('User just logged=', user);
-
         if (!user) {
             throw new Error("Invalid username or password");
         }
@@ -40,7 +38,7 @@ export class AuthService {
             message: "Login successful",
             data: {
                 token_type: "Bearer",
-                access_token: generateAccessToken(user.id),
+                access_token: generateAccessToken({ userId: user.id, userRole: user.role.name }), // Pass payloadProps
                 expires_in: jwtConfig.accessTokenExpirationTime,
                 refresh_token: generateRefreshToken(user.id),
                 user,
@@ -50,7 +48,7 @@ export class AuthService {
 
     async refreshToken(refreshToken: string) {
         const payload = verifyToken(refreshToken, TokenType.REFRESH) as TokenPayload;
-        const newAccessToken = generateAccessToken(payload.userId);
+        const newAccessToken = generateRefreshToken(payload.userId);
         return newAccessToken;
     }
 }

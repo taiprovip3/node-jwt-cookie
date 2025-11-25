@@ -6,6 +6,7 @@ import "dotenv/config"; // Dung cho ES module
 // import dotenv from "dotenv"; // Nhận xét: Dùng cho commonjs
 // dotenv.config();
 import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import { AppDataSource } from "./config/data-source.js";
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 const PORT = 3000;
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

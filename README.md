@@ -1,11 +1,12 @@
 ### PROJECT FEATURE ###
-- Project typescript was configured params.
-- Using import/export next modules syntax but compliper to CommonJS by ts-node-dev run (not module, NEXTJS). ts-node-dev support build CommonJS good.
-- Database using simple lite: SQLITE3.
-- TypeORM hibernate entity relationship.
-- Index root file: index.js.
-- Refresh token save in cookie.
-- Login response standard base on OAUTH 2.0.
-- Using Eslint format code.
-- Authorization API: not implement.
-- Middleware: not implement.
+- Project typescript was configured params;
+- Project use ESM syntax;
+- Using import/export next modules syntax but compliper to CommonJS by ts-node-dev run (not module, NEXTJS). ts-node-dev support build CommonJS good;
+- Database using simple lite: SQLITE3;
+- TypeORM hibernate entity relationship;
+- Index root file: index.js;
+- Refresh token save in cookie;
+- Login response standard base on OAUTH 2.0;
+- Using Eslint format code;
+- Authorization API: not implement;
+- Middleware: not implement;

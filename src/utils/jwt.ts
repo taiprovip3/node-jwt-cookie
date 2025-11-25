@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import { jwtConfig } from "../config/jwt-config.js";
-import { TokenPayload } from "../types/TokenPayload.js";
+import { TokenPayload, TokenPayloadProps } from "../types/TokenPayload.js";
 import { TokenType } from "../types/TokenType.js";
 
-export const generateAccessToken = (userId: number): string => {
+export const generateAccessToken = (tokenPayloadProps: TokenPayloadProps): string => {
     // Implementation for generating JWT access token
     return jwt.sign(
-        { userId },
+        tokenPayloadProps,
         jwtConfig.jwtAccessSecret,
         { expiresIn: jwtConfig.accessTokenExpirationTime } as jwt.SignOptions
     );
