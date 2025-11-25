@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Profile } from "./Profile";
 import { Role } from "./Role";
 
@@ -31,12 +31,25 @@ export class User {
     @Column({ default: true })
     accountNonLocked!: boolean;
 
+    @CreateDateColumn({
+        nullable: true,
+        type: 'text', // Xác định kiểu dữ liệu trong DB là TEXT (Phù hợp với SQLite),
+    })
+    createdAt!: string;
+
+    @UpdateDateColumn({
+        nullable: true,
+        type: 'text' // Xác định kiểu dữ liệu trong DB là TEXT
+    })
+    updatedAt!: string;
+
     @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
     @JoinColumn()
     profile!: Profile | null;
 
     @ManyToOne(() => Role, (role) => role.users, { eager: true }) // eager: true → mỗi lần load User sẽ tự động load role (tiện cho auth).
     role!: Role;
+
 
     constructor() {
         this.profile = null;

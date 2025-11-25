@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./Address";
 import { User } from "./User";
 
@@ -34,10 +34,16 @@ export class Profile {
     @Column({ default: "" })
     bio!: string;
 
-    @Column()
+    @CreateDateColumn({
+        nullable: true,
+        type: 'text',
+    })
     createdAt!: string;
 
-    @Column()
+    @UpdateDateColumn({
+        nullable: true,
+        type: 'text',
+    })
     updatedAt!: string;
 
     @OneToMany(() => Address, (address) => address.profile, { cascade: true })
