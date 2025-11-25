@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
-import { jwtConfig } from "../config/jwt-config";
+import { jwtConfig } from "../config/jwt-config.js";
+import { TokenPayload } from "../types/TokenPayload.js";
+import { TokenType } from "../types/TokenType.js";
 
 export const generateAccessToken = (userId: number): string => {
     // Implementation for generating JWT access token
@@ -10,10 +12,6 @@ export const generateAccessToken = (userId: number): string => {
     );
 };
 
-export const verifyAccessToken = (token: string, secret: string) => {
-    // Implementation for verifying JWT access token
-};
-
 export const generateRefreshToken = (userId: number): string => {
     // Implementation for generating JWT refresh token
     return jwt.sign(
@@ -21,4 +19,21 @@ export const generateRefreshToken = (userId: number): string => {
         jwtConfig.jwtRefreshSecret,
         { expiresIn: jwtConfig.refreshTokenExpirationTime } as jwt.SignOptions
     )
+};
+
+/**
+ * @param token // the JWT token to verify
+ * @param type // type of the token: ACCESS or REFRESH
+ * @returns // TokenPayload if the token is valid
+ */
+export const verifyToken = (token: string, type: TokenType ) => {
+    // Implementation for verifying JWT access token
+    switch (type) {
+        case TokenType.ACCESS:
+            return jwt.verify(token, jwtConfig.jwtAccessSecret) as TokenPayload;
+        case TokenType.REFRESH:
+            return jwt.verify(token, jwtConfig.jwtRefreshSecret) as TokenPayload;
+        default:
+            throw new Error("Invalid token type");
+    }
 };

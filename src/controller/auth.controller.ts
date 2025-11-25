@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AuthService } from "../service/auth.service";
+import { AuthService } from "../service/auth.service.js";
 
 const authService = new AuthService();
 
@@ -51,6 +51,7 @@ export class AuthController {
             });
 
         } catch (err) {
+            console.error(err);
             return res.status(401).json({ error: "Invalid refresh token" });
         }
     }

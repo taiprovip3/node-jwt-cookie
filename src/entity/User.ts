@@ -1,34 +1,34 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { Profile } from "./Profile";
-import { Role } from "./Role";
+import { Profile } from "./Profile.js";
+import { Role } from "./Role.js";
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ unique: true })
+    @Column({ type: "varchar", unique: true })
     username!: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     password!: string;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     email?: string;
 
-    @Column({ default: false })
+    @Column({ type: "boolean", default: false })
     isEmailVerified!: boolean;
 
-    @Column({ default: false })
+    @Column({ type: "boolean", default: false })
     isDisabled!: boolean;
 
-    @Column({ default: true })
+    @Column({ type: "boolean", default: true })
     accountNonExpired!: boolean;
 
-    @Column({ default: true })
+    @Column({ type: "boolean", default: true })
     credentialsNonExpired!: boolean;
 
-    @Column({ default: true })
+    @Column({ type: "boolean", default: true })
     accountNonLocked!: boolean;
 
     @CreateDateColumn({

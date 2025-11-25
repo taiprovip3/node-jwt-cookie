@@ -7,8 +7,8 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "commonjs",
-    "target": "ES2020",
+    "module": "nodenext", // "commonjs"
+    "target": "es2022", // "ES2020"
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -36,15 +36,16 @@
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": false,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
 
     // Additional Settings for NodeJS ESM
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext", // "node"
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "lib": ["es5", "es6", "dom"],
   }
 }

@@ -1,21 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Profile } from "./Profile";
+import { Profile } from "./Profile.js";
 
 @Entity()
 export class Address {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column()
+    @Column({ type: "varchar" })
     fullname!: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     phoneNumber!: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     countryCode!: string;
 
-    @Column()
+    @Column({type: "varchar" })
     address!: string;
 
     @ManyToOne(() => Profile, (profile) => profile.addresses)

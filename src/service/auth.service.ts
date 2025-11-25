@@ -1,10 +1,11 @@
-import { userRepository } from "../repository/user.repository";
+import { userRepository } from "../repository/user.repository.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
-import { jwtConfig } from "../config/jwt-config";
-
+import { generateAccessToken, generateRefreshToken, verifyToken } from "../utils/jwt.js";
+import { jwtConfig } from "../config/jwt-config.js";
+import { TokenPayload } from "../types/TokenPayload.js";
+import { TokenType } from "../types/TokenType.js";
 export class AuthService {
+    
     async register(username: string, password: string) {
         const hookExistedUser = await userRepository.findOne({ where: { username } });
         if (hookExistedUser) {
@@ -46,9 +47,9 @@ export class AuthService {
             }
         };
     }
+
     async refreshToken(refreshToken: string) {
-        const payload: any = jwt.verify(refreshToken, jwtConfig.jwtRefreshSecret); // verify refresh token
-        console.log("What is inside the payload of refreshToken?:", payload);
+        const payload = verifyToken(refreshToken, TokenType.REFRESH) as TokenPayload;
         const newAccessToken = generateAccessToken(payload.userId);
         return newAccessToken;
     }

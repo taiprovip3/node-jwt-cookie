@@ -1,37 +1,37 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { Address } from "./Address";
-import { User } from "./User";
+import { Address } from "./Address.js";
+import { User } from "./User.js";
 
 @Entity()
 export class Profile {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     fullname?: string;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     phoneNumber?: string;
 
-    @Column()
+    @Column({ type: "varchar" })
     phoneCode!: string;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     gender?: string;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     dateOfBirth?: string;
 
-    @Column({ default: 0 })
+    @Column({ type: "double", default: 0 })
     balance!: number;
 
-    @Column({ nullable: true })
+    @Column({ type: "varchar", nullable: true })
     defaultAddress?: string;
 
-    @Column({ default: "" })
+    @Column({ type: "varchar", default: "https://tintuc.dienthoaigiakho.vn/wp-content/uploads/2025/04/cach-tao-avatar-discord.png" })
     avatarUrl!: string;
 
-    @Column({ default: "" })
+    @Column({ type: "text", default: "" })
     bio!: string;
 
     @CreateDateColumn({

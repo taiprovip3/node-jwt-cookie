@@ -1,10 +1,12 @@
+import "reflect-metadata";
 import cookieParser from "cookie-parser";
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
-dotenv.config();
-import authRoutes from "./routes/auth.routes";
-import { AppDataSource } from "./config/data-source";
+import "dotenv/config"; // Dung cho ES module
+// import dotenv from "dotenv"; // Nhận xét: Dùng cho commonjs
+// dotenv.config();
+import authRoutes from "./routes/auth.routes.js";
+import { AppDataSource } from "./config/data-source.js";
 
 const app = express();
 app.use(express.json());
