@@ -22,7 +22,7 @@
 6. Test api. Path / default for print Hello World! (my images test by postman in /src/assets/images..)
 7. Enjoy.
 
-## Somethings you cound change to your like ##
+## Somethings you could change to your like ##
 - Change .env value to your key secret.
 - Change avatarUrl to your hobby image url online.
 - Connect your SQL-IDE to SQLITE (i use DBEver).

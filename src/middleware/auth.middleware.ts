@@ -23,6 +23,6 @@ export const verifyAccessToken = (req: CustomAuthExpressRequest, res: Response, 
         next();
     }  catch (err) {
         console.error(err);
-        return res.status(403).json({ message: 'Invalid access token or expired.' });
+        return res.status(403).json({ message: 'Invalid access token or expired.' }); // Throw error in response to user.
     }
 };

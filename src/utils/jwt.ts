@@ -34,6 +34,6 @@ export const verifyToken = (token: string, type: TokenType ) => {
         case TokenType.REFRESH:
             return jwt.verify(token, jwtConfig.jwtRefreshSecret) as TokenPayload;
         default:
-            throw new Error("Invalid token type");
+            throw new Error("Invalid token type."); // Throw error in application console. Not in response to user.
     }
 };
