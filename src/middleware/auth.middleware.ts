@@ -3,6 +3,7 @@ import { verifyToken } from "../utils/jwt.js";
 import { TokenType } from "../types/TokenType.js";
 import { TokenPayload } from "../types/TokenPayload.js";
 import { CustomAuthExpressRequest } from "../types/CustomAuthExpressRequest.js";
+import { RequestHandler } from "../utils/response-handler.js";
 
 /**
  * 
@@ -14,15 +15,15 @@ import { CustomAuthExpressRequest } from "../types/CustomAuthExpressRequest.js";
 export const verifyAccessToken = (req: CustomAuthExpressRequest, res: Response, next: NextFunction) => {
     const token = req.cookies['access_token'] || req.headers['authorization']?.toString().replace('Bearer ', '');
     if (!token) {
-        return res.status(401).json({ message: 'Access token missing' });
+        return RequestHandler.error(res, "MIDDLEWARE_VERIFY_ACCESS_TOKEN", "Access token is missing.", 401);
     }
 
     try {
         const decoded = verifyToken(token, TokenType.ACCESS) as TokenPayload;
         req.user = decoded;
         next();
-    }  catch (err) {
-        console.error(err);
-        return res.status(403).json({ message: 'Invalid access token or expired.' }); // Throw error in response to user.
+    }  catch (error) {
+        console.error(error);
+        return RequestHandler.error(res, "MIDDLEWARE_VERIFY_ACCESS_TOKEN", "Invalid access token or expired.", 403);
     }
 };

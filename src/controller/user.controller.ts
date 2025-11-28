@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../service/user.service.js";
+import { RequestHandler } from "../utils/response-handler.js";
 
 const userService = new UserService();
 export class UserController {
@@ -8,12 +9,12 @@ export class UserController {
         try {
             const userProfile = await userService.getProfile(userId);
             if (!userProfile) {
-                return res.status(404).json({ message: 'User not found' });
+                return RequestHandler.error(res, "GET_PROFILE", "User not found.", 404);
             }
-            res.status(200).json(userProfile);
+            return RequestHandler.success(res, "GET_PROFILE", userProfile, "User profile retrieved successfully.");
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Internal server error' });
+            return RequestHandler.error(res, "GET_PROFILE", "Internal server error.", 500);
         }
     }
 }

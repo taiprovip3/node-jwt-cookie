@@ -8,7 +8,7 @@ export class UserService {
             select: ["id", "username", "email", "isEmailVerified", "isDisabled", "accountNonExpired", "credentialsNonExpired", "accountNonLocked", "createdAt", "updatedAt", "profile", "role"], // Select only necessary fields
         });
         if (!user) {
-            return null; // ko throw vì hàm này được gọi như 1 giá trị trả về, ko phải xử lý lỗi
+            return null; // ko throw vì hàm này được gọi như 1 giá trị trả về, ko phải xử lý lỗi.
         }
         return user;
     }

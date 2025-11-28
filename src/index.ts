@@ -8,6 +8,8 @@ import "dotenv/config"; // Dung cho ES module
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import { AppDataSource } from "./config/data-source.js";
+import { requestMiddleware } from "./middleware/request.middleware.js";
+import { errorMiddleware } from "./middleware/error.middleware.js";
 
 const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -18,19 +20,20 @@ app.use(cors({
   credentials: true,
 }));
 app.use((req: Request, res: Response, next: NextFunction) => {
-  console.log(`${req.method} ${req.path}`);
+  console.info(`🗣 ➜  ${req.method} ${req.path}`);
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-
-const PORT = process.env.PORT || 3000;
-
+app.use(requestMiddleware); // Add some properties to req object
+app.use(errorMiddleware); // Catch app errors and return a custom response
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+const PORT = process.env.PORT || 3000;
 
 AppDataSource.initialize().then(() => {
   console.log("📦 Data Source has been initialized!");

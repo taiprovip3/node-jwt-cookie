@@ -12,6 +12,7 @@
 - Using eslint format code;
 - Authorization API in middleware;
 - Middleware: verify token & check roles request (USER, MODERATOR, ADMIN);
+- Custom standard response api's information (success or error request);
 
 ## Steps on run project (on local) ##
 1. Open folder project in terminal (or vscode workspace)
