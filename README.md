@@ -13,7 +13,7 @@
 - TypeORM current is intense conflict with typescript 5.0 beacause the stricter. Therefore, the mapping entity relationship has some different from traditonal.
 - ts-node-dev, module, nextjs, next module, tsx, tsx is very comlex thing to understand. Just follow tsconfig.json.
 - ts-node-dev support build CommonJS good.
-- Database and syntax using simple lite: SQLITE3. SQLITE3 have no default timestamp server. So i made a simple `convertTimeToGM7T` function in date.js to convert time. You could change the time zone code suit on your country.
+- Database and syntax use SQLITE3. See on NPM document.
 - Database table and table data is avaiable when first run app (init.sql will generated).
 - Index root entry file: index.ts.
 - Refresh token save in cookie.
