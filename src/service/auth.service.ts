@@ -34,7 +34,7 @@ export class AuthService {
 
         return {
             token_type: "Bearer",
-            access_token: generateAccessToken({ userId: user.id, userRole: user.role.name }), // Pass payloadProps
+            access_token: generateAccessToken({ userId: user.id, userRole: (await user.role).name }), // Pass payloadProps
             expires_in: jwtConfig.accessTokenExpirationTime,
             refresh_token: generateRefreshToken(user.id),
             user,

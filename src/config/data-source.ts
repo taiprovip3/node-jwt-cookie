@@ -1,11 +1,14 @@
-import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { Address } from "../entity/Address.js";
+import { Profile } from "../entity/Profile.js";
+import { Role } from "../entity/Role.js";
+import { User } from "../entity/User.js";
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
     database: "database.sqlite",
     synchronize: true,
     logging: false,
-    entities: ["src/entity/**/*.ts"],
-    migrations: ["src/database/migrations/**/*.ts"],
+    entities: [Address, Profile, Role, User],
+    migrations: [], // migrations: ["src/database/migrations/**/*.ts"]
 });

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Profile } from "./Profile.js";
 
 @Entity()
@@ -18,6 +18,7 @@ export class Address {
     @Column({type: "varchar" })
     address!: string;
 
-    @ManyToOne(() => Profile, (profile) => profile.addresses)
-    profile!: Profile;
+    @ManyToOne(() => Profile, (profile) => profile.addresses, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'profile_id' })
+    profile!: Promise<Profile>;
 }

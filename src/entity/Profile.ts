@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./Address.js";
-import { User } from "./User.js";
 
 @Entity()
 export class Profile {
@@ -46,9 +45,6 @@ export class Profile {
     })
     updatedAt!: string;
 
-    @OneToMany(() => Address, (address) => address.profile, { cascade: true })
-    addresses!: Address[];
-
-    @OneToOne(() => User, (user) => user.profile)
-    user!: User;
+    @OneToMany(() => Address, (address) => address.profile)
+    addresses!: Promise<Address[]>;
 }

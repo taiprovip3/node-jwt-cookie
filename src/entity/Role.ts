@@ -19,5 +19,5 @@ export class Role {
     name!: RoleName;
 
     @OneToMany(() => User, (user) => user.role) // Mối quan hệ 2 chiều giúp cho chức năng ADMIN dò ra những user nào có role "USER", hoặc "MODERATOR", "ADMIN".
-    users!: User[];
+    users!: Promise<User[]>;
 }

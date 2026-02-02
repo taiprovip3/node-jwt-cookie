@@ -43,13 +43,12 @@ export class User {
     })
     updatedAt!: string;
 
-    @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
+    @OneToOne(() => Profile, { cascade: true, eager: true, nullable: true })
     @JoinColumn()
     profile!: Profile | null;
 
     @ManyToOne(() => Role, (role) => role.users, { eager: true }) // eager: true → mỗi lần load User sẽ tự động load role (tiện cho auth).
-    role!: Role;
-
+    role!: Promise<Role> | Role;
 
     constructor() {
         this.profile = null;
