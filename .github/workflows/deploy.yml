@@ -24,7 +24,7 @@ jobs:
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
             cd ${{ secrets.APP_PATH }}
-            git pull origin main
+            git pull origin master
             npm install
             npm run build || true
             pm2 restart node-jwt-cookie
