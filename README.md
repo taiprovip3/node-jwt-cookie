@@ -36,11 +36,11 @@
 ## Somethings you could change to your like ##
 - Change .env value to your key secret.
 - Change avatarUrl to your hobby image url online.
-- Connect your SQL-IDE to SQLITE (i use DBEver).
+- Connect your DBMS to SQLITE by import file database.sqlite (i use DBEver).
 - Change api url from local to your domain if deployed.
 - To run format code: ```npm run lint```
 - Database SQLite not have UTC+ 1time zone. So i make avaiable function data.js in /src/utils.js to convert (VN country) for future if you want to use.
-- To test user login api use username and password: user01 | 087663az
+- To test user login api use username and password: user01 | 087663az, user02 | 087663az, user03 | 087663az
 
 
 #### ============================ THANKS FOR USING ============================ ####
