@@ -40,7 +40,7 @@
 - Change api url from local to your domain if deployed.
 - To run format code: ```npm run lint```
 - Database SQLite not have UTC+ 1time zone. So i make avaiable function data.js in /src/utils.js to convert (VN country) for future if you want to use.
-- To test user login api use username and password: user01 | 087663az, user02 | 087663az, user03 | 087663az
+- To test api login, use some username and password: user01 | 087663az, user02 | 087663az, user03 | 087663az
 
 
 #### ============================ THANKS FOR USING ============================ ####
