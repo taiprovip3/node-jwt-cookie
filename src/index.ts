@@ -7,6 +7,7 @@ import "dotenv/config"; // Dung cho ES module
 // dotenv.config();
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import videoRoutes from "./routes/video.router.js";
 import { requestMiddleware } from "./middleware/request.middleware.js";
 import { errorMiddleware } from "./middleware/error.middleware.js";
 
@@ -27,6 +28,7 @@ app.use(requestMiddleware); // Add some properties to req object
 app.use(errorMiddleware); // Catch app errors and return a custom response
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/videos", videoRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

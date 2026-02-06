@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./Address.js";
+import { Video } from "./Video.js";
 
 @Entity()
 export class Profile {
@@ -47,4 +48,7 @@ export class Profile {
 
     @OneToMany(() => Address, (address) => address.profile)
     addresses!: Promise<Address[]>;
+
+    @OneToMany(() => Video, (video) => video.uploader)
+    videos!: Promise<Video[]>;
 }
