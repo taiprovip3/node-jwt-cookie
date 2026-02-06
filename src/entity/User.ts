@@ -54,4 +54,9 @@ export class User {
         this.profile = null;
         this.role = { id: 1 } as Role; // Mặc định mỗi user mới sẽ có role là "USER".
     }
+
+    toJSON() {
+        const { password, ...user } = this;
+        return user;
+    }
 }

@@ -23,6 +23,7 @@ export class AuthService {
 
     async login(username: string, password: string) {
         const user = await userRepository.findOne({ where: { username } }); 
+        
         if (!user) {
             throw new Error("Invalid username or password.");
         }

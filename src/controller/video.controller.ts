@@ -45,7 +45,6 @@ export class VideoController {
     }
 
     async getVideosCursor (req: Request, res: Response) {
-        // Get params from request
         const limit = Number(req.query.limit) || 10;
         const cursor = req.query.cursor as string | undefined;
 
