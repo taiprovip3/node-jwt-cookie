@@ -13,11 +13,10 @@ import { RequestHandler } from "../utils/response-handler.js";
  * @returns Kiểm tra và xác thực access token từ header hoặc cookie
  */
 export const verifyAccessToken = (req: CustomAuthExpressRequest, res: Response, next: NextFunction) => {
-    const token = req.cookies['access_token'] || req.headers['authorization']?.toString().replace('Bearer ', '');
+    const token = req.signedCookies['access_token'] || req.headers['authorization']?.toString().replace('Bearer ', '');
     if (!token) {
         return RequestHandler.error(res, "MIDDLEWARE_VERIFY_ACCESS_TOKEN", "Access token is missing.", 401);
     }
-
     try {
         const decoded = verifyToken(token, TokenType.ACCESS) as TokenPayload;
         req.user = decoded;

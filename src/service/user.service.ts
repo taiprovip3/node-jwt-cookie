@@ -12,4 +12,12 @@ export class UserService {
         }
         return user;
     }
+
+    async getUserData(userId: number) {
+        const user = await userRepository.findOne({ where: { id: userId } }); 
+        if (!user) {
+            return null;
+        }
+        return user;
+    }
 }
