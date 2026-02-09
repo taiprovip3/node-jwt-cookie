@@ -1,5 +1,9 @@
 import { userRepository } from "../repository/user.repository.js";
+import { TokenPayload } from "../types/TokenPayload.js";
+import { TokenType } from "../types/TokenType.js";
+import { verifyToken } from "../utils/jwt.util.js";
 
+type GetUserSource = 'ID' | 'ACCESS_TOKEN' | 'REFRESH_TOKEN';
 export class UserService {
     // User service methods would be defined here
     async getProfile(userId: number) {
@@ -13,10 +17,29 @@ export class UserService {
         return user;
     }
 
-    async getUserData(userId: number) {
-        const user = await userRepository.findOne({ where: { id: userId } }); 
+    async getUserFrom(from: GetUserSource, value: string | number, ) {
+        let userId: number;
+        switch (from) {
+            case 'ACCESS_TOKEN': {
+                const payload = verifyToken(value as string, TokenType.ACCESS) as TokenPayload;
+                userId = payload.userId;
+                break;
+            }
+            case 'REFRESH_TOKEN': {
+                const payload = verifyToken(value as string, TokenType.REFRESH) as TokenPayload;
+                userId = payload.userId;
+                break;
+            }
+            case 'ID': {
+                userId = value as number;
+                break;
+            }
+            default:
+                throw new Error("Invalid source type");
+        }
+        const user = await userRepository.findOne({ where: { id: userId } });
         if (!user) {
-            return null;
+            throw new Error(`User id ${userId} not found`);
         }
         return user;
     }

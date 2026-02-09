@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import { minioClient, BUCKET_NAME } from "../config/minio.js";
 
 import { v4 as uuidV4 } from 'uuid';
-import { RequestHandler } from '../utils/response-handler.js';
+import { RequestHandler } from '../types/ResponseHandler.js';
 import { AppDataSource } from '../config/data-source.js';
 import { Video } from '../entity/Video.js';
-import { getEnv, getEnvNumber } from '../utils/env.js';
+import { getEnv, getEnvNumber } from '../utils/env.util.js';
 
 export class VideoController {
     async uploadVideo(req: Request, res: Response) {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../service/user.service.js";
-import { RequestHandler } from "../utils/response-handler.js";
+import { RequestHandler } from "../types/ResponseHandler.js";
 
 const userService = new UserService();
 export class UserController {

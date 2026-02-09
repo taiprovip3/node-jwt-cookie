@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./Address.js";
 import { Video } from "./Video.js";
+import { getEnv } from "../utils/env.util.js";
 
 @Entity()
 export class Profile {
@@ -28,7 +29,7 @@ export class Profile {
     @Column({ type: "varchar", nullable: true })
     defaultAddress?: string;
 
-    @Column({ type: "varchar", default: "https://tintuc.dienthoaigiakho.vn/wp-content/uploads/2025/04/cach-tao-avatar-discord.png" })
+    @Column({ type: "varchar", default: getEnv('DEFAULT_PROFILE_AVATAR_URL') })
     avatarUrl!: string;
 
     @Column({ type: "text", default: "" })

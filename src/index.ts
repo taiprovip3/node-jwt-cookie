@@ -20,15 +20,17 @@ app.use(cors({
   credentials: true,
 }));
 app.use((req: Request, res: Response, next: NextFunction) => {
-  console.info(`🗣 ➜  ${req.method} ${req.path}`);
+  console.info(`🗣  ➜  ${req.method} ${req.path}`);
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-app.use(requestMiddleware); // Add some properties to req object
-app.use(errorMiddleware); // Catch app errors and return a custom response
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
+
+// Bắt buộc đặt sau app.use
+app.use(requestMiddleware); // Add some properties to req object
+app.use(errorMiddleware); // Catch app errors and return a custom response
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

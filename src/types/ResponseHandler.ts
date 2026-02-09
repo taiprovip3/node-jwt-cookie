@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { CustomApiResponse } from "../types/CustomApiResponse.js";
+import { CustomApiResponse } from "./CustomApiResponse.js";
 
 export class RequestHandler {
     static success<T>(res: Response, action: string, data: T, message = "Success", statusCode = 200) {

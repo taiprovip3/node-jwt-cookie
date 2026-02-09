@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
-import { verifyToken } from "../utils/jwt.js";
+import { verifyToken } from "../utils/jwt.util.js";
 import { TokenType } from "../types/TokenType.js";
 import { TokenPayload } from "../types/TokenPayload.js";
 import { CustomAuthExpressRequest } from "../types/CustomAuthExpressRequest.js";
-import { RequestHandler } from "../utils/response-handler.js";
+import { RequestHandler } from "../types/ResponseHandler.js";
 
 /**
  * 

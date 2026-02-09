@@ -56,7 +56,8 @@ export class User {
     }
 
     toJSON() {
-        const { password, ...user } = this;
+        const user = { ...this };
+        Reflect.deleteProperty(user, 'password');
         return user;
     }
 }

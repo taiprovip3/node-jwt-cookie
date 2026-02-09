@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import { CustomAuthExpressRequest } from "../types/CustomAuthExpressRequest.js";
-import { RequestHandler } from "../utils/response-handler.js";
+import { RequestHandler } from "../types/ResponseHandler.js";
 
 export const allowRoles = (...roles: string[]) => { // ... mean allowRoles("admin", "manager") instead of allowRoles(["admin", "manager"])
     return (req: CustomAuthExpressRequest, res: Response, next: NextFunction) => {

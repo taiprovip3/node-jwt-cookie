@@ -1,6 +1,6 @@
 
 import { Client } from "minio";
-import { getEnv, getEnvNumber } from "../utils/env.js";
+import { getEnv, getEnvNumber } from "../utils/env.util.js";
 
 export const minioClient = new Client({
   endPoint: getEnv('MINIO_ENDPOINT', 'localhost'),
