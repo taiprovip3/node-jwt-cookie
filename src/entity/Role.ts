@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { User } from "./User.js";
+import { Permission } from "./Permission.js";
 
 export enum RoleName {
     USER = "USER",
@@ -19,5 +20,9 @@ export class Role {
     name!: RoleName;
 
     @OneToMany(() => User, (user) => user.role) // Mối quan hệ 2 chiều giúp cho chức năng ADMIN dò ra những user nào có role "USER", hoặc "MODERATOR", "ADMIN".
-    users!: Promise<User[]>;
+    users!: User[];
+
+    @ManyToMany(() => Permission, (permission) => permission.roles, { eager: true })
+    @JoinTable({ name: "role_permissions"  })
+    permissions!: Permission[];
 }

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm";
 import { Profile } from "./Profile.js";
 import { Role } from "./Role.js";
+import { Permission } from "./Permission.js";
 
 @Entity()
 export class User {
@@ -48,7 +49,12 @@ export class User {
     profile!: Profile | null;
 
     @ManyToOne(() => Role, (role) => role.users, { eager: true }) // eager: true → mỗi lần load User sẽ tự động load role (tiện cho auth).
-    role!: Promise<Role> | Role;
+    role!: Role;
+
+    // Permission override (upgrade riêng lẻ)
+    @ManyToMany(() => Permission, (permission) => permission.users, { eager: true })
+    @JoinTable({ name: "user_permissons" })
+    permissions!: Permission[];
 
     constructor() {
         this.profile = null;

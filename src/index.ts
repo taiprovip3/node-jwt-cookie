@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import cookieParser from "cookie-parser";
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import cors from "cors";
 import "dotenv/config"; // Dung cho ES module
 // import dotenv from "dotenv"; // Nhận xét: Dùng cho commonjs
@@ -19,17 +19,12 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
 }));
-app.use((req: Request, res: Response, next: NextFunction) => {
-  console.info(`🗣  ➜  ${req.method} ${req.path}`);
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+
+app.use(requestMiddleware); // Add some properties to req object
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
-
 // Bắt buộc đặt sau app.use
-app.use(requestMiddleware); // Add some properties to req object
 app.use(errorMiddleware); // Catch app errors and return a custom response
 
 app.get("/", (req, res) => {

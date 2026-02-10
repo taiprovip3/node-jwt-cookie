@@ -168,6 +168,6 @@ export class AuthController {
             oldPassword,
             newPassword,
         });
-        return RequestHandler.success(res, "WHOAMI", null, 'Password changed successfully.');
+        return RequestHandler.success(res, "WHOAMI", { message: 'This app still keep login session.' }, 'Password changed successfully.');
     }
 }
