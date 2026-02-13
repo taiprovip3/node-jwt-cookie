@@ -20,6 +20,9 @@ export class User {
     @Column({ type: "boolean", default: false })
     isEmailVerified!: boolean;
 
+    @Column({ type: "datetime", nullable: true })
+    emailVerifiedDate!: Date | null;
+
     @Column({ type: "boolean", default: false })
     isDisabled!: boolean;
 

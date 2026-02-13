@@ -20,7 +20,18 @@ export default defineConfig([
         ...globals.node,
         ...globals.es2022,
       }
-    }
+    },
+    // Thêm đoạn rules này vào đây
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ]
+    },
   },
   tseslint.configs.recommended,
 ]);

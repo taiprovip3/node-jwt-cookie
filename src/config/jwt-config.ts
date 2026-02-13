@@ -36,10 +36,10 @@ function getRequiredEnv(key: string): string {
  * Cấu hình cho JSON Web Token (JWT) được lấy từ biến môi trường.
  */
 export const jwtConfig: JwtConfig = {
-      jwtAccessSecret: getRequiredEnv('JWT_ACCESS_SECRET'),
-      jwtRefreshSecret: getRequiredEnv('JWT_REFRESH_SECRET'),
-      accessTokenExpirationTime: getRequiredEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
-      refreshTokenExpirationTime: getRequiredEnv('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
+  jwtAccessSecret: getRequiredEnv('JWT_ACCESS_SECRET'),
+  jwtRefreshSecret: getRequiredEnv('JWT_REFRESH_SECRET'),
+  accessTokenExpirationTime: getRequiredEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
+  refreshTokenExpirationTime: getRequiredEnv('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
 };
 
 // Nếu cần dùng các cấu hình khác (ví dụ: PORT) ở cùng nơi, bạn có thể thêm:
