@@ -27,7 +27,7 @@ app.use("/api/videos", videoRoutes);
 // Bắt buộc đặt sau app.use
 app.use(errorMiddleware); // Catch app errors and return a custom response
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("Hello World!");
 });
 

@@ -1,4 +1,8 @@
+import { UpdateProfileDto } from "../dto/update-profile.dto.js";
+import { Profile } from "../entity/Profile.js";
+import { profileRepository } from "../repository/profile.repository.js";
 import { userRepository } from "../repository/user.repository.js";
+import { CustomThrowError } from "../types/CustomThrowError.js";
 import { TokenPayload } from "../types/TokenPayload.js";
 import { TokenType } from "../types/TokenType.js";
 import { verifyToken } from "../utils/jwt.util.js";
@@ -42,5 +46,15 @@ export class UserService {
             throw new Error(`User id ${userId} not found`);
         }
         return user;
+    }
+
+    async updateProfile(profileId: number, dto: UpdateProfileDto): Promise<Profile> {
+        const profile = await profileRepository.findOne({ where: { id: profileId }});
+        if(!profile) {
+            throw new CustomThrowError("UPDATE_PROFILE", "Profile not found", 404);
+        }
+        Object.assign(profile, dto);
+        profile.updatedAt = new Date().toISOString();
+        return profileRepository.save(profile);
     }
 }

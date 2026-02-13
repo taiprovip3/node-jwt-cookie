@@ -17,4 +17,13 @@ export class UserController {
             return RequestHandler.error(res, "GET_PROFILE", "Internal server error.", 500);
         }
     }
+
+    async updateProfile(req: Request, res: Response) {
+        const profileId = Number(req.params.id);
+        if(isNaN(profileId)) {
+            return RequestHandler.error(res, "UPDATE_PROFILE", "Invalid profile id", 400);
+        }
+        const profile = await userService.updateProfile(profileId, req.body);
+        return RequestHandler.success(res, "UPDATE_PROFILE", profile, "OK", 200);
+    }
 }

@@ -47,9 +47,9 @@ export class Profile {
     })
     updatedAt!: string;
 
-    @OneToMany(() => Address, (address) => address.profile)
-    addresses!: Promise<Address[]>;
+    @OneToMany(() => Address, (address) => address.profile, { eager: true })
+    addresses!: Address[];
 
     @OneToMany(() => Video, (video) => video.uploader)
-    videos!: Promise<Video[]>;
+    videos!: Video[];
 }
