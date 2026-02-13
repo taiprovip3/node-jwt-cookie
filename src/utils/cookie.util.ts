@@ -7,8 +7,8 @@ export const setAuthCookies = (
   accessToken: string,
   refreshToken: string
 ) => {
-  const accessExpires = getEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME') as StringValue;
-  const refreshExpires = getEnv('JWT_REFRESH_TOKEN_EXPIRATION_TIME') as StringValue;
+  const accessExpires = getEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME', { default: '15m' }) as StringValue;
+  const refreshExpires = getEnv('JWT_REFRESH_TOKEN_EXPIRATION_TIME', { default: '7d' }) as StringValue;
 
   res.cookie("access_token", accessToken, {
     httpOnly: true,

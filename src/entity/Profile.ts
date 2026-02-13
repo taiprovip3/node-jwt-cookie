@@ -29,7 +29,7 @@ export class Profile {
     @Column({ type: "varchar", nullable: true })
     defaultAddress?: string;
 
-    @Column({ type: "varchar", default: getEnv('DEFAULT_PROFILE_AVATAR_URL') })
+    @Column({ type: "varchar", default: getEnv('DEFAULT_PROFILE_AVATAR_URL', { default: 'https://tintuc.dienthoaigiakho.vn/wp-content/uploads/2025/04/cach-tao-avatar-discord.png' }) })
     avatarUrl!: string;
 
     @Column({ type: "text", default: "" })

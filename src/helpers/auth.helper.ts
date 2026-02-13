@@ -7,7 +7,7 @@ export const buildOAuth2Response = (
   accessToken: string,
   user?: User,
 ) => {
-  const expiresInRaw = getEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME') as StringValue;
+  const expiresInRaw = getEnv('JWT_ACCESS_TOKEN_EXPIRATION_TIME', { default: '15m' }) as StringValue;
   const expiresInMs = ms(expiresInRaw);
 
   if (!expiresInMs) {

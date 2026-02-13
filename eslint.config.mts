@@ -8,7 +8,15 @@ export default defineConfig([
     ignores: ["dist/**", "node_modules/**", "build/**"]
   },
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    files: ["eslint.config.mts"],
+    languageOptions: {
+      parserOptions: {
+        project: null,
+      }
+    }
+  },
+  {
+    files: ["src/**/*.{ts,tsx}"], //**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
@@ -21,8 +29,7 @@ export default defineConfig([
         ...globals.es2022,
       }
     },
-    // Thêm đoạn rules này vào đây
-    rules: {
+    rules: { // Thêm rules
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

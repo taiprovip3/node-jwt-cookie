@@ -2,18 +2,18 @@ import nodemailer from "nodemailer";
 import { getEnv } from "./env.util.js";
 
 export const mailTransporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  host: getEnv('MAIL_HOST', { default: 'smtp.gmail.com' }),
+  port: getEnv('MAIL_PORT', { default: 587 }),
+  secure: getEnv('MAIL_SECURE', { default: false }),
   auth: {
-    user: 'taito1doraemon@gmail.com',
-    pass: 'wfpvyonbtldotxfd',
-  }
+    user: getEnv('MAIL_USER', { default: 'taito1doraemon@gmail.com' }),
+    pass: getEnv('MAIL_PASS', { default: 'wfpvyonbtldotxfd' }),
+  },
 });
 
 export async function deliveryMailByNodeMailer(to: string, token: string) {
   try {
-    const verifyUrl = `${getEnv('APP_URL')}/api/auth/verify-email?token=${token}`;
+    const verifyUrl = `${getEnv('APP_URL', { default: 'http://localhost:3000' })}/api/auth/verify-email?token=${token}`;
     const info = await mailTransporter.sendMail({
       from: 'taito1doraemon@gmail.com',
       to,

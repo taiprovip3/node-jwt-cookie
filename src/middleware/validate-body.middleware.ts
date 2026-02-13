@@ -1,9 +1,9 @@
-import { plainToInstance } from 'class-transformer';
+import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { Request, Response, NextFunction } from 'express';
 import { RequestHandler } from '../types/ResponseHandler.js';
 
-export function validateBody(dtoClass: any) {
+export function validateBody<T extends object>(dtoClass: ClassConstructor<T>) {
   return async (req: Request, res: Response, next: NextFunction) => {
     if(!req.body || Object.keys(req.body).length === 0) {
       return RequestHandler.error(res, "VALIDATE_BODY", "Request body must not be empty!", 400);

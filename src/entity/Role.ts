@@ -24,5 +24,5 @@ export class Role {
 
     @ManyToMany(() => Permission, (permission) => permission.roles, { lazy: true })
     @JoinTable({ name: "role_permissions"  })
-    permissions!: Permission[];
+    permissions!: Promise<Permission[]>; // Do lazy
 }

@@ -114,11 +114,7 @@ export class AuthController {
         if (!oldPassword || !newPassword) {
             return RequestHandler.error(res, "CHANGE_PASSWORD", `Missing oldPassword or newPassword.`, 400);
         }
-        await authService.changePassword({
-            userId,
-            oldPassword,
-            newPassword,
-        });
+        await authService.changePassword({userId, oldPassword, newPassword});
         return RequestHandler.success(res, "WHOAMI", { message: 'This app still keep login session.' }, 'Password changed successfully.');
     }
 

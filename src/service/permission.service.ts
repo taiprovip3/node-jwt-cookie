@@ -10,9 +10,12 @@ export class PermissionService {
         role: { permissions: true },
       }
     });
-    if (!user) return new Set();
+    if (!user) {
+      return new Set();
+    }
     const permissions = new Set<string>();
-    user.role.permissions.forEach(p => permissions.add(p.code));
+    const rolePermissions = await user.role.permissions;
+    rolePermissions.forEach(p => permissions.add(p.code));
     user.permissions.forEach(p => permissions.add(p.code));
     return permissions;
   }

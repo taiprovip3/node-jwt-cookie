@@ -5,7 +5,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { RequestHandler } from '../types/ResponseHandler.js';
 import { AppDataSource } from '../config/data-source.js';
 import { Video } from '../entity/Video.js';
-import { getEnv, getEnvNumber } from '../utils/env.util.js';
+import { getEnv } from '../utils/env.util.js';
 
 export class VideoController {
     async uploadVideo(req: Request, res: Response) {
@@ -23,8 +23,8 @@ export class VideoController {
 
             // Upload to minio
             await minioClient.putObject(BUCKET_NAME, objectName, file.buffer, file.size, { contentType: file.mimetype });
-
-            const publicUrl = `${getEnv('MINIO_PROTOCOL', 'http://')}${getEnv('MINIO_ENDPOINT', 'localhost')}:${getEnvNumber('MINIO_PORT', 9000)}/${BUCKET_NAME}/${objectName}`;
+            
+            const publicUrl = `${getEnv('MINIO_PROTOCOL', { default: 'http://' })}${getEnv('MINIO_ENDPOINT', { default: 'localhost' })}:${getEnv('MINIO_PORT', { default: 9000 })}/${BUCKET_NAME}/${objectName}`;
             console.log('publicUrl=', publicUrl);
 
             // Database
