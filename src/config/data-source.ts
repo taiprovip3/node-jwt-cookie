@@ -3,8 +3,6 @@ import { Address } from "../entity/Address.js";
 import { Profile } from "../entity/Profile.js";
 import { Role } from "../entity/Role.js";
 import { User } from "../entity/User.js";
-import { Tag } from "../entity/Tag.js";
-import { Video } from "../entity/Video.js";
 import { Permission } from "../entity/Permission.js";
 
 export const AppDataSource = new DataSource({
@@ -12,6 +10,6 @@ export const AppDataSource = new DataSource({
     database: "database.sqlite",
     synchronize: true,
     logging: false,
-    entities: [Address, Profile, Role, User, Video, Tag, Permission],
+    entities: [Address, Profile, Role, User, Permission],
     migrations: [], // migrations: ["src/database/migrations/**/*.ts"]
 });

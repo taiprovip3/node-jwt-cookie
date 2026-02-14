@@ -5,13 +5,6 @@ import { CustomAuthExpressRequest } from "../types/CustomAuthExpressRequest.js";
 import { RequestHandler } from "../types/ResponseHandler.js";
 import { verifyToken } from "../utils/jwt.util.js";
 
-/**
- * 
- * @param req CustomAuthenticatedRequest extended request object
- * @param res 
- * @param next 
- * @returns Kiểm tra và xác thực access token từ header hoặc cookie
- */
 export const verifyAccessToken = (req: CustomAuthExpressRequest, res: Response, next: NextFunction) => {
     const token = req.signedCookies['access_token'] || req.headers['authorization']?.toString().replace('Bearer ', '');
     if (!token) {
